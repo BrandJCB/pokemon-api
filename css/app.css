@@ -1,0 +1,93 @@
+/* Variables globales */
+:root{
+  --fuentePrincipal: 'Secular One', sans-serif;
+  --indianRed : #CD5C5C;
+  --crimson: 	#DC143C;
+  --gold: 	#FDD700;
+  --powderBlue: 	#B0E0E6;
+  --borderRad :3.5rem;
+  --borderRads :1.5rem;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 1 rem = 10px */    
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* GLOBALES */
+
+body{
+  background-color: var(--powderBlue);
+  font-family: var(--fuentePrincipal);
+}
+
+.contenedor{
+  width: min(90%, 120rem);
+  margin: 0 auto;
+}
+
+.titulos{
+  font-size: 4rem;
+  margin: 0;
+  color: var(--gold);
+}
+
+/* HEADER */
+header{
+  padding: 1.5rem;
+  background-color: var(--crimson);
+}
+
+.pokedex{
+  text-align: center;
+}
+
+/* CONTENEDOR GENERAL */
+.contenedor-general{
+  background-color: #fff;
+  margin-top: 6rem;
+  height: 100%;
+  border-top-left-radius: var(--borderRad);
+  border-top-right-radius: var(--borderRad);
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (min-width: 768px){
+  .contenedor-general{
+    height: 52rem;
+    align-items: center;
+  }
+}
+
+/* Contenedor pokemones */
+.contenedor-pokemon{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  text-align: center;
+  border-radius: var(--borderRad);
+  margin: 5rem 0 5rem 0;
+}
+
+.card-pokemon{
+  border-radius: var(--borderRads);
+  background-color: gray;
+  flex: 0 0 calc(33.3% - 9rem);
+  margin: 0 0 2.5rem 0;
+}
+
+@media (min-width: 768px){
+  .contenedor-pokemon{
+    flex-direction: row;
+    margin: 0;
+  }
+
+  .card-pokemon{
+    margin: 0;
+  }
+}
