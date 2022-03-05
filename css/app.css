@@ -39,6 +39,17 @@ body{
 header{
   padding: 1.5rem;
   background-color: var(--crimson);
+  left: 0;
+  right: 0;
+  top: 0;
+  position: sticky;
+  z-index: 1;
+}
+
+@media (min-width: 768px){
+  header{
+    position:relative
+  }
 }
 
 .pokedex{
@@ -47,7 +58,10 @@ header{
 
 /* CONTENEDOR GENERAL */
 .contenedor-general{
-  background-color: #fff;
+  background-image: url(/img/pokemon-in-the-wild.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   margin-top: 6rem;
   height: 100%;
   border-top-left-radius: var(--borderRad);
@@ -64,6 +78,12 @@ header{
   }
 }
 
+@media (min-width: 1400px){
+  .contenedor-general{
+    height: 65.2rem;
+  }
+}
+
 /* Contenedor pokemones */
 .contenedor-pokemon{
   display: flex;
@@ -76,9 +96,11 @@ header{
 
 .card-pokemon{
   border-radius: var(--borderRads);
-  background-color: gray;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(.3rem);
   flex: 0 0 calc(33.3% - 9rem);
   margin: 0 0 2.5rem 0;
+  z-index: 0;
 }
 
 @media (min-width: 768px){
