@@ -7,6 +7,8 @@
   --powderBlue: 	#B0E0E6;
   --borderRad :3.5rem;
   --borderRads :1.5rem;
+  --teal : 	#008080;
+  --darkRed: 			#0000CD;
 }
 
 html {
@@ -89,7 +91,7 @@ header{
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  text-align: center;
+  /* text-align: center; */
   border-radius: var(--borderRad);
   margin: 5rem 0 5rem 0;
 }
@@ -112,4 +114,29 @@ header{
   .card-pokemon{
     margin: 0;
   }
+}
+
+.visual-pokemon{
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(.4rem);
+  border-top-left-radius: var(--borderRads);
+  border-top-right-radius: var(--borderRads);
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.stats-pokemon{
+  padding: 2rem;
+}
+
+.stats-pokemon p{
+  font-size: 1.9rem;
+}
+
+.stats-pokemon p span{
+  font-size: 1.5rem;
+}
+
+.mayor{
+  font-size: 1.5rem;
 }
