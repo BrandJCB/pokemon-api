@@ -1,43 +1,59 @@
+//?Declaramos la posición inicial de la paginación (por defecto es 1)
+let pagina = 0;
+
+//?Botones de paginacion
+const btnAnterior = document.querySelector('.btnAnterior');
+const btnSiguiente = document.querySelector('.btnSiguiente');
+
+//?Funcion boton siguiente
+btnSiguiente.addEventListener('click', ()=>{
+  if (pagina < 1126) {
+      pagina += 3;
+      console.log(pagina);
+      llamadaAPIFetchPokemon(pagina);
+  }
+})
+
+//?Funcion boton anterior
+btnAnterior.addEventListener('click', ()=>{
+  if( pagina > 0){
+    pagina -= 3;
+    console.log(pagina);
+    llamadaAPIFetchPokemon(pagina);
+  }
+})
 
 
 //?Función que hace el llamado a la API REST de Pokémon
-const llamadaAPIFetchPokemon = async (id) =>{
+const llamadaAPIFetchPokemon = async (offset) =>{
   try {
     //*Llamar a la API de pokemon por medio de fetch
-    const peticion = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    const peticion = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=3&offset=${offset}`);
 
     //*Revisar si la peticion fu aceptada por la API de Pokemon
     if(peticion.status === 200){
       const data = await peticion.json();
 
-      console.log(data);
-      console.log('Nombre: ' + data.name);
-      console.log('Imagen: ' + data.sprites.other.home.front_default);
-      console.log('Habilidades:  ' + data.abilities);
-      console.log('Hp: ' + data.stats[0].base_stat);
-      console.log('Experiencia: ' + data.base_experience);
-      console.log('Ataque: ' + data.stats[1].base_stat);
-
-      //*Variable en la que guardaremos el HTML que se añadira 
-      let cardPokemon = '';
-
-      //Recorreomos la data que hemos traido
-      cardPokemon += `
-      <div class="card-pokemon">
-        <div class="visual-pokemon">
-          <img src="${data.sprites.other.home.front_default}" width="150px" alt="">
-        </div>
-        <div class="stats-pokemon">
-          <p>Nombre: <span>${data.name}</span></p>
-          <p>Hp: <span>${data.stats[0].base_stat}</span></p>
-          <p>Experiencia: <span>${data.base_experience}</span></p>
-          <p>Ataque: <span>${data.stats[1].base_stat}</span></p>
-        </div>
-      </div>
-      `;
-
-      document.getElementById('contenedor-pokemon').innerHTML = cardPokemon;
-
+      data.results.forEach(result => {
+        document.getElementById('contenedor-pokemon').innerHTML = '';
+        //*Traemos la informacion de cada uno de los pokemones
+        infoPokemon(result.url)
+        .then( res => {
+          document.getElementById('contenedor-pokemon').innerHTML += `
+          <div class="card-pokemon" >
+            <div class="visual-pokemon">
+              <img src="${res.sprites.other.home.front_default}" width="150px" alt="">
+            </div>
+            <div class="stats-pokemon">
+              <p>Nombre: <span>${res.name}</span></p>
+              <p>Hp: <span>${res.stats[0].base_stat}</span></p>
+              <p>Experiencia: <span>${res.base_experience}</span></p>
+              <p>Ataque: <span>${res.stats[1].base_stat}</span></p>
+            </div>
+          </div>
+        `;
+        })
+      })
     }else{
       console.log('Ha ocurrido un error');
     }
@@ -46,8 +62,21 @@ const llamadaAPIFetchPokemon = async (id) =>{
   } catch (error) {
     console.log('Error');
   }
-  
-  
 }
 
-llamadaAPIFetchPokemon(400);
+//?Funcion que trae la informacion de pokemon especifico pasando como parametro su url
+const infoPokemon = async (url) => {
+  try {
+    const peticion = await fetch(url);
+
+    //*Revisamos que el status de la peticion sea el exitoso
+    if(peticion.status === 200){
+      const data = await peticion.json();
+      return data;
+    }
+  } catch (error) {
+    console.log('Error');
+  }
+}
+
+llamadaAPIFetchPokemon(0);

@@ -9,6 +9,7 @@
   --borderRads :1.5rem;
   --teal : 	#008080;
   --darkRed: 			#0000CD;
+  --tealDark: #055a5a;
 }
 
 html {
@@ -70,6 +71,7 @@ header{
   border-top-right-radius: var(--borderRad);
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 
@@ -122,7 +124,7 @@ header{
   border-top-left-radius: var(--borderRads);
   border-top-right-radius: var(--borderRads);
   text-align: center;
-  padding: 4rem 0;
+  
 }
 
 .stats-pokemon{
@@ -139,4 +141,36 @@ header{
 
 .mayor{
   font-size: 1.5rem;
+}
+
+.paginacion{
+	position: fixed;
+	bottom: 0;
+	background: var(--crimson);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 1rem;
+}
+
+.paginacion button {
+	cursor: pointer;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 4rem;
+	width: 15rem;
+	background: var(--teal);
+	color: #fff;
+	border-radius: 100px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	transition: .3s ease all;
+}
+
+.paginacion button:hover {
+	background: var(--tealDark);
 }
