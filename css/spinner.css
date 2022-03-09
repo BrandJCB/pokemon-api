@@ -1,0 +1,75 @@
+
+
+.centrado{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden{
+  overflow: hidden;
+}
+
+.pokebola{
+  width: 10rem;
+  height: 10rem;
+  background: #fff;
+  border-radius: 50%;
+  border: 0.3rem solid #333;
+  animation-name: spinner;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: infinite;
+}
+
+/* ?Propiedades que aoareceran antes del contenido seleccionado */
+.pokebola::before{
+  content: '';/* Sirve para que las propiedades que estamos agrgando puedan ser vistas */
+  width: 9.5rem;
+  height: 5rem;
+  background: red;
+  border-radius: 5rem 5rem 0 0;
+  position: absolute;
+
+}
+
+.detalle{
+  width: 9.5rem;
+  height: 0.5rem;
+  background: #333;
+  margin-top: 4.8rem;
+  position: absolute;
+}
+
+.detalle::before{
+  content: '';
+  width: 3rem;
+  height: 3rem;
+  background: #333;
+  border-radius: 50%;
+  margin-top: -1.1rem;
+  margin-left: 3.5rem;
+  position: absolute;
+}
+.detalle::after{
+  content: '';
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #fff;
+  border-radius: 50%;
+  margin-top: -0.5rem;
+  margin-left: 4.1rem;
+  position: absolute;
+}
+
+@keyframes  spinner{
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+   transform: rotate(360deg);
+  }
+}
+

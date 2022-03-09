@@ -1,3 +1,9 @@
+const spinner = document.getElementById('spinner');
+window.onload = function(){
+  document.querySelector('.hidden').classList.remove('hidden');
+  spinner.remove();
+}
+
 //?Declaramos la posición inicial de la paginación (por defecto es 1)
 let pagina = 0;
 
@@ -9,7 +15,6 @@ const btnSiguiente = document.querySelector('.btnSiguiente');
 btnSiguiente.addEventListener('click', ()=>{
   if (pagina < 1126) {
       pagina += 3;
-      console.log(pagina);
       llamadaAPIFetchPokemon(pagina);
   }
 })
@@ -18,7 +23,6 @@ btnSiguiente.addEventListener('click', ()=>{
 btnAnterior.addEventListener('click', ()=>{
   if( pagina > 0){
     pagina -= 3;
-    console.log(pagina);
     llamadaAPIFetchPokemon(pagina);
   }
 })
@@ -26,19 +30,23 @@ btnAnterior.addEventListener('click', ()=>{
 
 //?Función que hace el llamado a la API REST de Pokémon
 const llamadaAPIFetchPokemon = async (offset) =>{
+  
   try {
     //*Llamar a la API de pokemon por medio de fetch
     const peticion = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=3&offset=${offset}`);
-
     //*Revisar si la peticion fu aceptada por la API de Pokemon
     if(peticion.status === 200){
+      
+
       const data = await peticion.json();
 
       data.results.forEach(result => {
+
         document.getElementById('contenedor-pokemon').innerHTML = '';
         //*Traemos la informacion de cada uno de los pokemones
         infoPokemon(result.url)
         .then( res => {
+          
           document.getElementById('contenedor-pokemon').innerHTML += `
           <div class="card-pokemon" >
             <div class="visual-pokemon">
